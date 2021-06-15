@@ -12,7 +12,7 @@ from joblib import load, dump
 
 
 # Lectura del dataset
-fullDataset = pd.read_csv('../datasets/data_target_stv_2017.csv', index_col=0, parse_dates=True)
+fullDataset = pd.read_csv('../datasets/Sotavento/data_target_stv_2016_2017.csv', index_col=0, parse_dates=True)
 
 x_col, target_col = fullDataset.columns[:-1], fullDataset.columns[-1]
 data, target = fullDataset[x_col], fullDataset[target_col]
@@ -42,7 +42,7 @@ y_transformer = StandardScaler()
 inner_estimator = TransformedTargetRegressor(regressor=regr_base, transformer=y_transformer)
 
 # Parametros a hiperparametrizar
-l_alpha = [10.**k for k in range(0, 5)]
+l_alpha = [10.**k for k in range(-2, 5)]
 n_components = list(range(50, 201, 25))
 
 param_grid = {
@@ -51,7 +51,7 @@ param_grid = {
 }
 
 # Numero de splits para Cross Validation
-n_splits = 6
+n_splits = 2
 kf = KFold(n_splits, shuffle=False)
 # Hiperparametrizacion
 cv_estimator = GridSearchCV(estimator=inner_estimator, 

@@ -10,7 +10,7 @@ from joblib import load, dump
 
 
 # Lectura del dataset
-fullDataset = pd.read_csv('../datasets/data_target_stv_2017.csv', index_col=0, parse_dates=True)
+fullDataset = pd.read_csv('../datasets/Sotavento/data_target_stv_2016_2017.csv', index_col=0, parse_dates=True)
 
 x_col, target_col = fullDataset.columns[:-1], fullDataset.columns[-1]
 data, target = fullDataset[x_col], fullDataset[target_col]
@@ -33,7 +33,7 @@ param_grid = {
 }
 
 # Numero de splits para Cross Validation
-n_splits = 6
+n_splits = 2
 kf = KFold(n_splits, shuffle=False)
 # Hiperparametrizacion
 cv_estimator = GridSearchCV(estimator=inner_estimator, 
